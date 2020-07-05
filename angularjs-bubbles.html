@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>AngularJS Bubbles by T.D. Stoneheart</title>
+    <script src="angular.min.js"></script>
+
+    <style>
+      body {
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-image: linear-gradient(180deg, #bf0 0%, #8f0 100%);
+      }
+
+      .bubble {
+        position: absolute;
+        background-color: white;
+        border-radius: 50%;
+        animation: bubble-animation 5s ease-in-out 0s 1 forwards;
+      }
+
+      @keyframes bubble-animation {
+        0% {
+          opacity: 0;
+        }
+        50% {
+          opacity: 0.5;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div ng-app="bubblesApp" ng-controller="bubblesController">
+      <div ng-repeat="bubble in bubbles">
+        <div ng-style="bubble.style" class="bubble"></div>
+      </div>
+    </div>
+
+    <script>
+      angular
+        .module("bubblesApp", [])
+        .controller("bubblesController", [
+          "$scope",
+          "$timeout",
+          "$interval",
+          bubblesController,
+        ]);
+
+      function bubblesController($scope, $timeout, $interval) {
+        class Bubble {
+          constructor() {
+            this.size =
+              Math.random() *
+              0.3 *
+              Math.min(window.innerWidth, window.innerHeight);
+            this.x = Math.random() * window.innerWidth;
+            this.y = Math.random() * window.innerHeight;
+            this.willBeDeleted = false;
+
+            $timeout(() => this.selfDestruct(), 5000);
+          }
+
+          selfDestruct() {
+            this.willBeDeleted = true;
+          }
+
+          get style() {
+            return {
+              left: `${this.x}px`,
+              top: `${this.y}px`,
+              width: `${this.size}px`,
+              height: `${this.size}px`,
+              filter: `blur(${this.size / 20}px)`,
+            };
+          }
+        }
+
+        $scope.bubbles = [];
+        $interval(eventLoop, 100);
+
+        function eventLoop() {
+          $scope.bubbles = $scope.bubbles
+            .filter(isNotDeleted)
+            .concat([new Bubble()]);
+        }
+
+        function isNotDeleted(bubble) {
+          return !bubble.willBeDeleted;
+        }
+      }
+    </script>
+  </body>
+</html>
