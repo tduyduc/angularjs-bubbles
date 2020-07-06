@@ -1,4 +1,4 @@
 # angularjs-bubbles
-Animated bubbles using AngularJS framework
+Animated bubbles (or bubbly lights) using AngularJS framework
 
 ![result](result.png)
