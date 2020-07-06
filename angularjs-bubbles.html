@@ -25,12 +25,15 @@
       @keyframes bubble-animation {
         0% {
           opacity: 0;
+          transform: translateY(0em);
         }
         50% {
           opacity: 0.5;
+          transform: translateY(-3em);
         }
         100% {
           opacity: 0;
+          transform: translateY(-6em);
         }
       }
     </style>
@@ -76,7 +79,7 @@
               top: `${this.y}px`,
               width: `${this.size}px`,
               height: `${this.size}px`,
-              filter: `blur(${this.size / 20}px)`,
+              filter: `blur(${this.size / 500}em)`,
             };
           }
         }
