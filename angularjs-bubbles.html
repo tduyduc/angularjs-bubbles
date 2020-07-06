@@ -57,15 +57,15 @@
 
       function bubblesController($scope, $timeout, $interval) {
         class Bubble {
-          constructor() {
-            this.size =
-              Math.random() *
-              0.3 *
-              Math.min(window.innerWidth, window.innerHeight);
-            this.x = Math.random() * window.innerWidth;
-            this.y = Math.random() * window.innerHeight;
-            this.willBeDeleted = false;
+          size =
+            0.3 *
+            Math.random() *
+            Math.min(window.innerWidth, window.innerHeight);
+          x = Math.random() * window.innerWidth;
+          y = Math.random() * window.innerHeight;
+          willBeDeleted = false;
 
+          constructor() {
             $timeout(() => this.selfDestruct(), 6000);
           }
 
