@@ -38,20 +38,20 @@
       }
     </style>
   </head>
-  <body>
-    <div ng-app="bubblesApp" ng-controller="bubblesController">
-      <div ng-repeat="bubble in bubbles">
-        <div ng-style="bubble.style" class="bubble"></div>
-      </div>
-    </div>
+  <body ng-app="bubblesApp" ng-controller="bubblesController">
+    <div
+      ng-repeat="bubble in bubbles"
+      ng-style="bubble.style"
+      class="bubble"
+    ></div>
 
     <script>
       angular
-        .module("bubblesApp", [])
-        .controller("bubblesController", [
-          "$scope",
-          "$timeout",
-          "$interval",
+        .module('bubblesApp', [])
+        .controller('bubblesController', [
+          '$scope',
+          '$timeout',
+          '$interval',
           bubblesController,
         ]);
 
